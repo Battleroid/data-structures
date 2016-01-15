@@ -7,5 +7,4 @@
 
 ### Fiddles
 
-1. [Recursive Tree](fiddles/RecursiveTree.java)
-
+1. [Recursive Tree (Fractal)](fiddles/RecursiveTree.java)
