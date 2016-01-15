@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 /**
  * Created by casey on 2016-01-14.
  */
-public class Fiddle_RecursiveTree extends Application {
+public class RecursiveTree extends Application {
     @Override
     public void start(Stage stage) {
         FiddlePane fp = new FiddlePane();
