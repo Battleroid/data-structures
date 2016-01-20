@@ -92,4 +92,8 @@ public class Exercise18_35 extends Application {
             createH(steps - 1, botR);
         }
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
