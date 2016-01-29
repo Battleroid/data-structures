@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -42,7 +43,7 @@ public class Exercise20_05 extends Application {
         btSubtract.setOnAction(e -> ballPane.subtract());
 
         // Mouse event for adding ball
-        ballPane.setOnMouseClicked(e -> ballPane.add());
+        ballPane.setOnMouseClicked(e -> ballPane.add(e.getX(), e.getY()));
 
         // Use a scroll bar to control animation speed
         ScrollBar sbSpeed = new ScrollBar();
@@ -56,7 +57,7 @@ public class Exercise20_05 extends Application {
         pane.setBottom(hBox);
 
         // Create a scene and place the pane in the stage
-        Scene scene = new Scene(pane, 250, 150);
+        Scene scene = new Scene(pane, 640, 480);
         primaryStage.setTitle("MultipleBounceBall"); // Set the stage title
         primaryStage.setScene(scene); // Place the scene in the stage
         primaryStage.show(); // Display the stage
@@ -77,6 +78,12 @@ public class Exercise20_05 extends Application {
             Color color = new Color(Math.random(),
                     Math.random(), Math.random(), 0.5);
             getChildren().add(new Ball(30, 30, 20, color));
+        }
+
+        public void add(double x, double y) {
+            Color color = new Color(Math.random(),
+                    Math.random(), Math.random(), 0.5);
+            getChildren().add(new Ball(x, y, 20, color));
         }
 
         public void subtract() {
@@ -121,17 +128,22 @@ public class Exercise20_05 extends Application {
 
                 // Check for collision
                 for (int i = 0; i < this.getChildren().size(); i++) {
+                    // Instead of using the bounds (which are rectangular) use the visual intersection of two shapes
+                    // to see if they are colliding, might be overkill, but certainly more accurate
                     Ball ballB = (Ball) this.getChildren().get(i);
-                    if (ballB.intersects(ball.getBoundsInLocal()) && ballB != ball) {
+                    Shape intersection = Shape.intersect(ballB, ball);
+
+                    // if the intersection has any width, we have collided, otherwise there is no collision
+                    if (intersection.getBoundsInLocal().getWidth() != -1 && !ballB.equals(ball)) {
                         // remove balls from children
                         this.getChildren().removeAll(ball, ballB);
 
-                        // new position
+                        // // new position and check bounds
                         double radius = ball.getRadius() + ballB.getRadius();
                         double x = (ballB.getCenterX() - radius < 0 || ballB.getCenterX() + radius > getWidth()) ? radius + 1 : ballB.getCenterX();
                         double y = (ballB.getCenterY() - radius < 0 || ballB.getCenterY() + radius > getHeight()) ? radius + 1 : ballB.getCenterY();
 
-                        // new ball
+                        // // new ball
                         Ball ballC = new Ball(x, y, radius, ball.color);
                         this.getChildren().add(ballC);
                     }
