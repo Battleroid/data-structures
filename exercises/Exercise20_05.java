@@ -128,13 +128,16 @@ public class Exercise20_05 extends Application {
 
                 // Check for collision
                 for (int i = 0; i < this.getChildren().size(); i++) {
+                    Ball ballB = (Ball) this.getChildren().get(i);
+
+                    // skip everything, we're not even touching the outer bounds so forget visual collision detection
+                    if (!(ballB.intersects(ball.getBoundsInLocal()) && ballB != ball)) continue;
+
                     // Instead of using the bounds (which are rectangular) use the visual intersection of two shapes
                     // to see if they are colliding, might be overkill, but certainly more accurate
-                    // TODO: It might be worth converting this to only check if we collide with the bounds, avoiding a call every tick of the animation
-                    Ball ballB = (Ball) this.getChildren().get(i);
                     Shape intersection = Shape.intersect(ballB, ball);
 
-                    // if the intersection has any width, we have collided, otherwise there is no collision
+                    // if the intersection has any width, we have collided, otherwise there is no collision, -1 indicates no collision
                     if (intersection.getBoundsInLocal().getWidth() != -1 && !ballB.equals(ball)) {
                         // remove balls from children
                         this.getChildren().removeAll(ball, ballB);
