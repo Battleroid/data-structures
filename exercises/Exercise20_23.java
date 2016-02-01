@@ -58,7 +58,6 @@ public class Exercise20_23 {
                                 operatorStack.peek() == '/')) {
                     processAnOperator(operandStack, operatorStack);
                 }
-
                 // Push the + or - operator into the operator stack
                 operatorStack.push(token.charAt(0));
             } else if (token.charAt(0) == '*' || token.charAt(0) == '/' || token.charAt(0) == '%') {
@@ -71,11 +70,11 @@ public class Exercise20_23 {
                 }
                 operatorStack.push(token.charAt(0));
             } else if (token.charAt(0) == '^') {
+                // Process all *, / in the top of the operator stack
                 while (!operatorStack.isEmpty() && operatorStack.peek() == '^') {
                     processAnOperator(operandStack, operatorStack);
                 }
-
-                // Push the * or / operator into the operator stack
+                // Push the ^ operator into the operator stack
                 operatorStack.push(token.charAt(0));
             } else if (token.trim().charAt(0) == '(') {
                 operatorStack.push('('); // Push '(' to stack
@@ -105,8 +104,7 @@ public class Exercise20_23 {
      * Process one operator: Take an operator from operatorStack and
      * apply it on the operands in the operandStack
      */
-    public static void processAnOperator(
-            Stack<Integer> operandStack, Stack<Character> operatorStack) {
+    public static void processAnOperator(Stack<Integer> operandStack, Stack<Character> operatorStack) {
         char op = operatorStack.pop();
         int op1 = operandStack.pop();
         int op2 = operandStack.pop();
@@ -126,7 +124,6 @@ public class Exercise20_23 {
 
     public static String insertBlanks(String s) {
         String result = "";
-
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '(' || s.charAt(i) == ')' ||
                     s.charAt(i) == '+' || s.charAt(i) == '-' ||
@@ -135,7 +132,6 @@ public class Exercise20_23 {
             else
                 result += s.charAt(i);
         }
-
         return result;
     }
 }
