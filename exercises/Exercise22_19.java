@@ -15,7 +15,8 @@ import java.util.Random;
  * Created by casey on 2016-02-22.
  */
 public class Exercise22_19 extends Application {
-    TextField[][] tf = new TextField[10][10];
+    static final int SIZE = 10;
+    TextField[][] tf = new TextField[SIZE][SIZE];
     BorderPane bp = new BorderPane();
     GridPane gp = new GridPane();
 
@@ -31,7 +32,7 @@ public class Exercise22_19 extends Application {
         Button findBtn = new Button("Find Block");
         ctrlBox.getChildren().addAll(randomizeBtn, findBtn);
         ctrlBox.setAlignment(Pos.CENTER);
-        ctrlBox.setPadding(new Insets(10));
+        ctrlBox.setPadding(new Insets(15));
         randomizeBtn.setOnAction(e -> {
             randomize();
         });
@@ -60,7 +61,7 @@ public class Exercise22_19 extends Application {
     }
 
     public void find() {
-        int[][] surr = new int[10][10];
+        int[][] surr = new int[SIZE][SIZE];
 
         // copy first row/col
         for (int i = 0; i < tf.length; i++) {
