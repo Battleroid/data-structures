@@ -87,14 +87,8 @@ public class Exercise22_09_GA {
             }
         }
 
-        // swap min point with first element in array
-        Point temp = from[0];
-        Point minPt = from[min];
-        from[0] = minPt;
-        from[min] = temp;
-        Point p0 = minPt;
-
         // sort based on angle
+        Point p0 = from[min];
         Arrays.sort(from, new AngleComparator(p0));
 
         // build hull
