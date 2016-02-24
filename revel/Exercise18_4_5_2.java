@@ -5,7 +5,7 @@ public class Exercise18_4_5_2 {
 		System.out.println(sample);
 	}
 
-	public static init(int[] arr, int n) {
+	public static void init(int[] arr, int n) {
 		if (n == 0) return;
 		arr[n - 1] = n - 1;
 		init(arr, n - 1);
