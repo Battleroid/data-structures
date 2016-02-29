@@ -5,6 +5,7 @@ package Exercise24_01;
  */
 
 import java.util.Collection;
+import java.util.Scanner;
 
 public class Exercise24_01 {
     interface MyList<E> extends java.util.Collection<E> {
@@ -100,8 +101,9 @@ public class Exercise24_01 {
         @Override
         public default boolean retainAll(Collection<?> c) {
             boolean modded = false;
-            for (int i = 0; i < size(); i++) {
-                if (!c.contains(get(i))) {
+            for (int i = size() - 1; i >= 0; i--) {
+                Object o = get(i);
+                if (!c.contains(o)) {
                     remove(i);
                     modded = true;
                 }
@@ -203,7 +205,6 @@ public class Exercise24_01 {
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -355,28 +356,28 @@ public class Exercise24_01 {
     }
 
     public static void main(String[] args) {
-        String[] name1 = {"Tom", "George", "Peter", "Jean", "Jane"};
-        String[] name2 = {"Tom", "George", "Michael", "Michelle", "Daniel"};
-        String[] name3 = {"Tom", "Peter"};
+//        String[] name1 = {"Tom", "George", "Peter", "Jean", "Jane"};
+//        String[] name2 = {"Tom", "George", "Michael", "Michelle", "Daniel"};
+//        String[] name3 = {"Tom", "Peter"};
 
-//        Scanner input = new Scanner(System.in);
-//        String[] name1 = new String[5];
-//        String[] name2 = new String[5];
-//        String[] name3 = new String[2];
-//        System.out.print("Enter five strings for array name1 separated by space: ");
-//        for (int i = 0; i < 5; i++) {
-//            name1[i] = input.next();
-//        }
-//
-//        System.out.print("Enter five strings for array name2 separated by space: ");
-//        for (int i = 0; i < 5; i++) {
-//            name2[i] = input.next();
-//        }
-//
-//        System.out.print("Enter two strings for array name2 separated by space: ");
-//        for (int i = 0; i < 2; i++) {
-//            name3[i] = input.next();
-//        }
+        Scanner input = new Scanner(System.in);
+        String[] name1 = new String[5];
+        String[] name2 = new String[5];
+        String[] name3 = new String[2];
+        System.out.print("Enter five strings for array name1 separated by space: ");
+        for (int i = 0; i < 5; i++) {
+            name1[i] = input.next();
+        }
+
+        System.out.print("Enter five strings for array name2 separated by space: ");
+        for (int i = 0; i < 5; i++) {
+            name2[i] = input.next();
+        }
+
+        System.out.print("Enter two strings for array name2 separated by space: ");
+        for (int i = 0; i < 2; i++) {
+            name3[i] = input.next();
+        }
 
         MyList<String> list1 = new MyArrayList<>(name1);
         MyList<String> list2 = new MyArrayList<>(name2);
