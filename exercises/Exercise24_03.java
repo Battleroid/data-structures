@@ -7,9 +7,8 @@ import java.util.Scanner;
 public class Exercise24_03 {
     public Exercise24_03() {
         TwoWayLinkedList<Double> list = new TwoWayLinkedList<>();
-//        System.out.print("Enter 7 integers: ");
-//        Scanner input = new Scanner(System.in);
-        Scanner input = new Scanner("1 2 3 4 5 6 7");
+        System.out.print("Enter 7 integers: ");
+        Scanner input = new Scanner(System.in);
         double[] v = new double[5];
         for (int i = 0; i < 5; i++)
             v[i] = input.nextDouble();
@@ -243,7 +242,6 @@ public class Exercise24_03 {
             } else if (index >= size) {
                 addLast(e);
             } else {
-                // TODO: set previous on adding at a specific index
                 Node<E> toadd = new Node<>(e);
                 Node<E> atindex = head;
                 for (int i = 0; i <= index; i++) {
@@ -255,15 +253,6 @@ public class Exercise24_03 {
                 toadd.next = atindex;
                 atindex.prev = toadd;
                 size++;
-//                Node<E> current = head;
-//                for (int i = 1; i < index; i++) {
-//                    current = current.next;
-//                }
-//                Node<E> temp = current.next;
-//                current.next = new Node<>(e);
-//                (current.next).next = temp;
-//                temp.prev = current;
-//                size++;
             }
         }
 
@@ -334,16 +323,6 @@ public class Exercise24_03 {
                 next.prev = prev;
                 size--;
                 return toremove.element;
-//                Node<E> previous = head;
-//
-//                for (int i = 1; i < index; i++) {
-//                    previous = previous.next;
-//                }
-//
-//                Node<E> current = previous.next;
-//                previous.next = current.next;
-//                size--;
-//                return current.element;
             }
         }
 
