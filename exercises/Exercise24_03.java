@@ -333,7 +333,6 @@ public class Exercise24_03 {
                 if (current.prev != null) {
                     pVal = current.prev.element.toString();
                 }
-                System.out.println("PREV: " + pVal + ", CURR: " + current.element + ", NEXT: " + current.next.element);
                 current = current.next;
             }
         }
