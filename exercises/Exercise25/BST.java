@@ -118,20 +118,6 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
         preorder(root.right);
     }
 
-    /**
-     * This inner class is static, because it does not access
-     * any instance members defined in its outer class
-     */
-    public static class TreeNode<E> {
-        protected E element;
-        protected TreeNode<E> left;
-        protected TreeNode<E> right;
-
-        public TreeNode(E e) {
-            element = e;
-        }
-    }
-
     @Override
     /** Get the number of nodes in the tree */
     public int getSize() {
@@ -236,6 +222,31 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
         return new PostOrderIterator();
     }
 
+    public java.util.Iterator<E> preorderIterator() {
+        return new PreOrderIterator();
+    }
+
+    @Override
+    /** Remove all elements from the tree */
+    public void clear() {
+        root = null;
+        size = 0;
+    }
+
+    /**
+     * This inner class is static, because it does not access
+     * any instance members defined in its outer class
+     */
+    public static class TreeNode<E> {
+        protected E element;
+        protected TreeNode<E> left;
+        protected TreeNode<E> right;
+
+        public TreeNode(E e) {
+            element = e;
+        }
+    }
+
     private class PostOrderIterator implements java.util.Iterator<E> {
         private java.util.ArrayList<E> list = new java.util.ArrayList<E>();
         private int current = 0;
@@ -269,10 +280,6 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
             list.clear();
             inorder();
         }
-    }
-
-    public java.util.Iterator<E> preorderIterator() {
-        return new PreOrderIterator();
     }
 
     private class PreOrderIterator implements java.util.Iterator<E> {
@@ -360,12 +367,5 @@ public class BST<E extends Comparable<E>> implements Tree<E> {
             list.clear(); // Clear the list
             inorder(); // Rebuild the list
         }
-    }
-
-    @Override
-    /** Remove all elements from the tree */
-    public void clear() {
-        root = null;
-        size = 0;
     }
 }

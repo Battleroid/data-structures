@@ -13,8 +13,8 @@ public class Exercise22_09_NA extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Point[] sample = new Point[]{
-                new Point(20, 10), new Point(50, 50),
                 new Point(10, 20), new Point(100, 30),
+                new Point(20, 10), new Point(50, 50),
                 new Point(100, 200), new Point(30, 30),
         };
 
