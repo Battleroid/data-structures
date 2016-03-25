@@ -15,8 +15,7 @@ public class Exercise25_15 {
     }
 
     public Exercise25_15() {
-//        Scanner input = new Scanner(System.in);
-        Scanner input = new Scanner("45 54 67 56 50 45 23 59 23 67");
+        Scanner input = new Scanner(System.in);
         BST tree = new BST<>();
 
         int[] list = new int[10];
@@ -27,6 +26,7 @@ public class Exercise25_15 {
         tree.delete(list[0]);
 
         for (int i = 0; i < list.length; i++) {
+            System.out.println(i);
             if (tree.isLeaf(list[i])) {
                 System.out.println(tree.getPath(list[i]));
             }
@@ -68,7 +68,6 @@ public class Exercise25_15 {
             return false;
         }
 
-        // TODO: fix so it works
         public TreeNode<E> getNode(E element) {
             ArrayList<TreeNode<E>> queue = new ArrayList<>();
             TreeNode<E> current = root;
@@ -98,7 +97,6 @@ public class Exercise25_15 {
         }
 
         @Override
-        // TODO: need to override to set parent of node when inserting
         /** Insert element o into the binary tree
          * Return true if the element is inserted successfully */
         public boolean insert(E e) {
@@ -245,7 +243,7 @@ public class Exercise25_15 {
                 // Connect the parent with the right child of the current node
                 if (parent == null) {
                     root = current.right;
-                    current.right.parent = root;
+                    root.parent = null;
                 } else {
                     if (e.compareTo(parent.element) < 0) {
                         parent.left = current.right;
@@ -320,7 +318,6 @@ public class Exercise25_15 {
             }
         }
 
-        // TODO: find node and return true if left/right are null
         public boolean isLeaf(E e) {
             TreeNode<E> current = getNode(e);
             if (current == null) return false;
@@ -328,7 +325,6 @@ public class Exercise25_15 {
             return false;
         }
 
-        // TODO: find node then recursively append root until no roots left
         public ArrayList<E> getPath(E e) {
             ArrayList<E> path = new ArrayList<>();
             TreeNode<E> current = getNode(e);
