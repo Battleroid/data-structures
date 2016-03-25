@@ -7,6 +7,7 @@ package Exercise25_15;
 import Exercise25.Tree;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Exercise25_15 {
     public static void main(String[] args) {
@@ -14,13 +15,22 @@ public class Exercise25_15 {
     }
 
     public Exercise25_15() {
+//        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner("45 54 67 56 50 45 23 59 23 67");
         BST tree = new BST<>();
-        tree.add(0);
-        tree.add(5);
-        tree.add(7);
-        tree.add(8);
-        tree.add(3);
-        System.out.println(tree.isLeaf(3));
+
+        int[] list = new int[10];
+        System.out.print("Enter 10 integers: ");
+        for (int i = 0; i < list.length; i++) {
+            tree.insert(list[i] = input.nextInt());
+        }
+        tree.delete(list[0]);
+
+        for (int i = 0; i < list.length; i++) {
+            if (tree.isLeaf(list[i])) {
+                System.out.println(tree.getPath(list[i]));
+            }
+        }
     }
 
     public class BST<E extends Comparable<E>> implements Tree<E> {
@@ -60,17 +70,29 @@ public class Exercise25_15 {
 
         // TODO: fix so it works
         public TreeNode<E> getNode(E element) {
+            ArrayList<TreeNode<E>> queue = new ArrayList<>();
             TreeNode<E> current = root;
+            queue.add(root);
 
-            while (current != null) {
-                if (element.compareTo(current.element) < 0) {
-                    current = current.left;
-                } else if (element.compareTo(current.element) > 0) {
-                    current = current.right;
+            while (!queue.isEmpty()) {
+                if (queue.get(0) != null && element.compareTo(queue.get(0).element) == 0) {
+                    return queue.get(0);
                 } else {
-                    return current;
+                    if (queue.get(0).left != null) queue.add(queue.get(0).left);
+                    if (queue.get(0).right != null) queue.add(queue.get(0).right);
+                    queue.remove(0);
                 }
             }
+
+//            while (current != null) {
+//                if (element.compareTo(current.element) < 0) {
+//                    current = current.left;
+//                } else if (element.compareTo(current.element) > 0) {
+//                    current = current.right;
+//                } else {
+//                    return current;
+//                }
+//            }
 
             return null;
         }
@@ -197,7 +219,6 @@ public class Exercise25_15 {
         }
 
         @Override
-        // TODO: need to fix parent for treenode when deleting
         /** Delete an element from the binary tree.
          * Return true if the element is deleted successfully
          * Return false if the element is not in the tree */
@@ -302,6 +323,7 @@ public class Exercise25_15 {
         // TODO: find node and return true if left/right are null
         public boolean isLeaf(E e) {
             TreeNode<E> current = getNode(e);
+            if (current == null) return false;
             if (current.left == null && current.right == null) return true;
             return false;
         }
@@ -310,7 +332,7 @@ public class Exercise25_15 {
         public ArrayList<E> getPath(E e) {
             ArrayList<E> path = new ArrayList<>();
             TreeNode<E> current = getNode(e);
-            while (current.parent != null) {
+            while (current != null) {
                 path.add(current.element);
                 current = current.parent;
             }
