@@ -69,3 +69,6 @@
   * http://algs4.cs.princeton.edu/cheatsheet/
 * Algorithms in general: https://xlinux.nist.gov/dads/
 * CS in general: https://gist.github.com/TSiege/cbb0507082bb18ff7e4b
+* AVL Tree
+  * https://en.wikipedia.org/wiki/AVL_tree
+  * https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
