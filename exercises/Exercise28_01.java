@@ -1,34 +1,44 @@
 import Exercise28_01Extra.Edge;
 import Exercise28_01Extra.UnweightedGraph;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.stream.Stream;
+import java.util.Scanner;
 
 /**
  * Created by casey on 2016-04-17.
  */
 public class Exercise28_01 {
     public static void main(String[] args) {
-        // check args
-        if (args.length < 1) {
-            System.out.printf("Usage:\n" +
-                    "\tExercise28_01 <input>");
-            System.exit(1);
+        // get url
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter URL: ");
+        URL url = null;
+        try {
+            url = new URL(in.nextLine());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
 
         // init edges/graph
         ArrayList<Edge> edges = new ArrayList<>();
         ArrayList<Integer> verts = new ArrayList<>();
-        UnweightedGraph<Integer> graph;
         ArrayList<String> lines = new ArrayList<>();
 
-        // load file contents
+        // read contents
         try {
-            Stream<String> stream = Files.lines(Paths.get(args[0]));
-            stream.forEach(line -> lines.add(line));
+            URLConnection uc = url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(uc.getInputStream()));
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+            br.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,7 +63,7 @@ public class Exercise28_01 {
         }
 
         // create graph
-        graph = new UnweightedGraph<>(verts, edges);
+        UnweightedGraph<Integer> graph = new UnweightedGraph<>(verts, edges);
         UnweightedGraph<Integer>.SearchTree st = graph.dfs(0);
         System.out.println("The number of vertices is " + graph.getSize());
         graph.printEdges();
