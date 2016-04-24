@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -44,10 +45,9 @@ public class Exercise29_09 {
         }
 
         // parse
-        int size = Integer.parseInt(lines.get(0));
-        for (int l = 1; l < size; l++) {
-            // first split by pipe
-            String[] portions = lines.get(l).split("\\|");
+        lines.remove(0);
+        for (String line : lines) {
+            String[] portions = line.split("\\|");
 
             for (String portion : portions) {
                 String[] e = portion.split("\\s*,\\s*");
@@ -64,6 +64,9 @@ public class Exercise29_09 {
                 edges.add(wei);
             }
         }
+
+        Collections.sort(verts);
+        Collections.sort(edges);
 
         // create graph
         WeightedGraph<Integer> graph = new WeightedGraph<>(verts, edges);
