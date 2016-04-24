@@ -15,7 +15,8 @@ import java.util.Scanner;
  */
 public class Exercise29_09 {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+//        Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner("https://liveexample.pearsoncmg.com/test/WeightedGraphSample.txt");
         System.out.println("Enter URL: ");
         URL url = null;
         try {
@@ -44,7 +45,7 @@ public class Exercise29_09 {
 
         // parse
         int size = Integer.parseInt(lines.get(0));
-        for (int l = 1; l <= size; l++) {
+        for (int l = 1; l < size; l++) {
             // first split by pipe
             String[] portions = lines.get(l).split("\\|");
 
@@ -55,9 +56,12 @@ public class Exercise29_09 {
                 int v = Integer.parseInt(e[1].trim());
                 double weight = Double.parseDouble(e[2].trim());
                 WeightedEdge we = new WeightedEdge(u, v, weight);
+                WeightedEdge wei = new WeightedEdge(v, u, weight);
 
                 if (!verts.contains(u)) verts.add(u);
+                if (!verts.contains(v)) verts.add(v);
                 edges.add(we);
+                edges.add(wei);
             }
         }
 
@@ -67,7 +71,6 @@ public class Exercise29_09 {
         graph.printWeightedEdges();
         WeightedGraph.MST mst = graph.getMinimumSpanningTree();
         System.out.println("Total weight in MST is " + mst.getTotalWeight());
-        System.out.println("Root is: " + mst.getRoot());
         mst.printTree();
     }
 }
